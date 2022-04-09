@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { AppProps, AppContext } from 'next/app';
 import type { NextPageContext } from 'next';
 import '../styles/globals.scss';
-
+import '../styles/main/main.scss'
 interface AppInitProps extends AppProps {
   isSSRMobile: boolean;
   mode: string;

@@ -1,0 +1,98 @@
+$maincolor: #24292F;
+
+ul{
+    margin: 0;
+    padding: 0 !important;
+}
+ul li{
+    list-style: none;
+}
+
+input[type=text] {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 0 10px;
+    padding: 3px 10px;
+    font-size: 13px;
+}
+
+@mixin headerStyle {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    background: $maincolor;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+}
+
+#header_PC {
+    @include headerStyle;
+    padding: 15px 50px;
+
+    & .search-bar{
+        width: 300px;
+
+        & input[type=text] {
+            width: 85%;
+        }
+    }
+
+    & a {
+        margin: 0 10px;
+        color: white;
+    }
+}
+
+#header_M {
+    @include headerStyle;
+    padding: 0px 20px;
+    height: 50px;
+}
+
+#header_M_menu{
+    position: fixed;
+    left: 0;
+    top:50px;
+    z-index: 9999;
+    background-color: $maincolor;
+    width: 100%;
+    color: white;
+
+    & li{
+        text-align: center;
+        padding: 10px 0;
+
+        & .search-bar{
+            width: 100%;
+    
+            & input[type=text] {
+                width: 85%;
+            }
+        }
+
+        & a {
+            color: white;
+        }
+    }
+}
+
+main {
+    margin: 100px 0;
+
+    & .contents{
+        border-radius: 8px;
+    }
+}
+
+
+
+footer{
+    text-align: center;
+    padding: 70px 0;
+}
