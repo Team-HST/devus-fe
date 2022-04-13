@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { AppProps, AppContext } from 'next/app';
-import type { NextPageContext } from 'next';
+import { RecoilRoot } from 'recoil';
+
 import '../styles/globals.scss';
 
 interface AppInitProps extends AppProps {
@@ -17,7 +18,11 @@ function DevUs({ Component, pageProps, isSSRMobile, mode }: AppInitProps) {
     }
   }, [mode]);
 
-  return <Component {...{ ...pageProps, isMobile }} />;
+  return (
+    <RecoilRoot>
+      <Component {...{ ...pageProps, isMobile }} />
+    </RecoilRoot>
+  );
 }
 
 DevUs.getInitialProps = async ({ ctx: { req } }: AppContext) => {
