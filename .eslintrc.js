@@ -20,6 +20,11 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'react-hooks'],
   rules: {
     'react/react-in-jsx-scope': 'off',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': [
+      'warn',
+      {
+        additionalHooks: 'useRecoilCallback',
+      },
+    ],
   },
 };
