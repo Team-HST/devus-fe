@@ -20,8 +20,9 @@
       "@/core/*": ["core/*"],
       "@/styles/*": ["styles/*"],
       "@/public/*": ["public/*"],
-      "@/api/*": ["apis/*"],
-      "@/hooks/*": ["hooks/*"]
+      "@/api/*": ["api/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/query/*": ["hooks/query/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
