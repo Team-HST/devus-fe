@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import type { AppProps, AppContext } from 'next/app';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 
 import '../styles/globals.scss';
@@ -8,6 +10,8 @@ interface AppInitProps extends AppProps {
   isSSRMobile: boolean;
   mode: string;
 }
+
+const queryClient = new QueryClient();
 
 function DevUs({ Component, pageProps, isSSRMobile, mode }: AppInitProps) {
   const [isMobile, setIsMobile] = useState(isSSRMobile);
@@ -20,7 +24,10 @@ function DevUs({ Component, pageProps, isSSRMobile, mode }: AppInitProps) {
 
   return (
     <RecoilRoot>
-      <Component {...{ ...pageProps, isMobile }} />
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Component {...{ ...pageProps, isMobile }} />
+      </QueryClientProvider>
     </RecoilRoot>
   );
 }

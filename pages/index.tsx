@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { userNameFormatSelector } from '@/core/recoil/user/selector';
+import { userNameFormatSelector } from 'atoms/user/selector';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
