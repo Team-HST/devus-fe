@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 
 import '../styles/globals.scss';
-import '../styles/main/main.scss'
+// import '../styles/main/main.scss';
 interface AppInitProps extends AppProps {
   isSSRMobile: boolean;
   mode: string;

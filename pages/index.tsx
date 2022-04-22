@@ -3,6 +3,11 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { userNameFormatSelector } from 'atoms/user/selector';
+import { themeState } from 'atoms/common/atom';
+
+import Switch from 'react-switch';
+
+import Style from '../styles/main/main.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -58,12 +63,27 @@ const Home = ({ isMobile }: HomeProps) => {
   const [userName, setUserName] = useState('Kim Younghoon');
   const [userNameFortmat, setUserNameFormat] = useRecoilState(userNameFormatSelector);
 
+  const [darkmodeatom, Setdarkmodeatom] = useRecoilState(themeState);
+  const [darkmodebool, Setdarkmodebool] = useState(false);
+
   useEffect(() => {
     setUserNameFormat(userName);
   }, [userName, setUserNameFormat]);
 
   function onToggleMenu() {
     SetMobilemenu((prev) => !prev);
+  }
+
+  function darkModeChange() {
+    if (darkmodeatom == 'light') {
+      document.getElementsByTagName('html')[0].classList.add('darkmode');
+      Setdarkmodeatom('dark');
+      Setdarkmodebool(true);
+    } else {
+      document.getElementsByTagName('html')[0].classList.remove('darkmode');
+      Setdarkmodeatom('light');
+      Setdarkmodebool(false);
+    }
   }
 
   return (
@@ -110,7 +130,7 @@ const Home = ({ isMobile }: HomeProps) => {
             ) : null}
           </>
         ) : (
-          <header id="header_PC">
+          <header id="header_PC" className={`${Style.header_PC} p-3`}>
             <div>
               <span className="me-4">Logo</span>
               <div className="d-inline-block search-bar me-3">
@@ -124,7 +144,17 @@ const Home = ({ isMobile }: HomeProps) => {
               <a href="">menu3</a>
               <a href="">menu4</a>
             </div>
-            <a href="">LOGOUT</a>
+            <div className="header_PC_right">
+              <Switch
+                onChange={darkModeChange}
+                checked={darkmodebool}
+                uncheckedIcon={false}
+                checkedIcon={false}
+                width={50}
+                height={20}
+              />
+              <a href="">LOGOUT</a>
+            </div>
           </header>
         )}{' '}
         <main>
@@ -137,28 +167,22 @@ const Home = ({ isMobile }: HomeProps) => {
             <section className="col-60">
               <div className="d-flex border-bottom pb-1 mb-3">
                 <div className="ms-auto d-flex align-items-center">
-                  {isMobile ? null : (
-                    <>
-                      {' '}
-                      <span
-                        className="pointer"
-                        onClick={() => {
-                          SetListStyle(true);
-                        }}
-                      >
-                        {' '}
-                        <FontAwesomeIcon icon={faList}></FontAwesomeIcon>
-                      </span>
-                      <span
-                        className="mx-5 pointer"
-                        onClick={() => {
-                          SetListStyle(false);
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faTablet}></FontAwesomeIcon>
-                      </span>
-                    </>
-                  )}
+                  <span
+                    className="pointer"
+                    onClick={() => {
+                      SetListStyle(true);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faList}></FontAwesomeIcon>
+                  </span>
+                  <span
+                    className="mx-5 pointer"
+                    onClick={() => {
+                      SetListStyle(false);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faTablet}></FontAwesomeIcon>
+                  </span>
                   <a href="" style={{ fontWeight: 'bold' }}>
                     글쓰기
                   </a>

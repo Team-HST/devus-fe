@@ -2,8 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -11,11 +11,19 @@ a {
   text-decoration: none !important;
 }
 
+ul {
+  margin: 0;
+  padding: 0 !important;
+}
+ul li {
+  list-style: none;
+}
+
 * {
   box-sizing: border-box;
 }
 
-.container{
+.container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 10px;
@@ -26,90 +34,90 @@ a {
   flex-wrap: wrap;
 }
 
-.d-inline-block{
+.d-inline-block {
   display: inline-block;
 }
 
-.ms-auto{
+.ms-auto {
   margin-left: auto;
 }
 
-.ms-1{
+.ms-1 {
   margin-left: 1rem;
 }
 
-.mx-5{
+.mx-5 {
   margin: 0 5px;
 }
 
-.pb-1{
+.pb-1 {
   padding-bottom: 0.5rem;
 }
 
-@mixin media(){
-  @media (max-width:768px) {
+@mixin media() {
+  @media (max-width: 768px) {
     width: 100%;
   }
 }
 
-.col-20{
+.col-20 {
   width: 20%;
   padding: 0 1rem;
   @include media();
 }
 
-.col-60{
+.col-60 {
   width: 60%;
   padding: 0 1rem;
   @include media();
 }
 
-.col-33{
+.col-33 {
   width: 33.3333%;
   padding: 0 0.5rem;
   @include media();
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
-.text-center{
+.text-center {
   text-align: center;
 }
 
-.d-flex{
+.d-flex {
   display: flex;
 }
 
 .p-3 {
-  padding: 1rem!important;
+  padding: 1rem !important;
 }
 
 .mb-3 {
-  margin-bottom: 1rem!important;
+  margin-bottom: 1rem !important;
 }
 
 .border {
-  border: 1px solid #ccc!important;
+  border: 1px solid #ccc !important;
 }
 
 .border-top {
-  border-top: 1px solid #ccc!important;
+  border-top: 1px solid #ccc !important;
 }
 
 .border-bottom {
-  border-bottom: 1px solid #ccc!important;
+  border-bottom: 1px solid #ccc !important;
 }
 
-@media (max-width:768px) {
-  section:nth-child(1){
+@media (max-width: 768px) {
+  section:nth-child(1) {
     order: 0;
   }
-  section:nth-child(2){
+  section:nth-child(2) {
     order: 2;
   }
-  section:nth-child(3){
+  section:nth-child(3) {
     order: 1;
   }
 }
