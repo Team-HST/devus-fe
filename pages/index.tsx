@@ -7,7 +7,7 @@ import { themeState } from 'atoms/common/atom';
 
 import Switch from 'react-switch';
 
-import Style from '../styles/main/main.module.scss';
+import style from '../styles/main/main.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -94,7 +94,7 @@ const Home = ({ isMobile }: HomeProps) => {
       <div className="container">
         {isMobile ? (
           <>
-            <header id="header_M">
+            <header id="header_M" className={style.header_M}>
               <div onClick={onToggleMenu} style={{ width: '15px;' }}>
                 <FontAwesomeIcon icon={mobilemenu ? faXmark : faBars}></FontAwesomeIcon>
               </div>
@@ -105,10 +105,10 @@ const Home = ({ isMobile }: HomeProps) => {
             </header>
 
             {mobilemenu ? (
-              <ul id="header_M_menu" className="p-3">
+              <ul id="header_M_menu" className={`${style.header_M_menu} p-3`}>
                 <li>
-                  <div className="search-bar">
-                    <input type="text" />
+                  <div className={style.search_bar}>
+                    <input type="text" className={style.inputtext} />
                     <span className="pointer">
                       <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </span>
@@ -130,11 +130,11 @@ const Home = ({ isMobile }: HomeProps) => {
             ) : null}
           </>
         ) : (
-          <header id="header_PC" className={`${Style.header_PC} p-3`}>
+          <header id="header_PC" className={`${style.header_PC} p-3`}>
             <div>
               <span className="me-4">Logo</span>
-              <div className="d-inline-block search-bar me-3">
-                <input type="text" />
+              <div className={`${style.search_bar} d-inline-block me-3"`}>
+                <input type="text" className={style.inputtext} />
                 <span className="pointer">
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </span>
@@ -144,7 +144,7 @@ const Home = ({ isMobile }: HomeProps) => {
               <a href="">menu3</a>
               <a href="">menu4</a>
             </div>
-            <div className="header_PC_right">
+            <div className={style.header_PC_right}>
               <Switch
                 onChange={darkModeChange}
                 checked={darkmodebool}
@@ -157,7 +157,7 @@ const Home = ({ isMobile }: HomeProps) => {
             </div>
           </header>
         )}{' '}
-        <main>
+        <main className={style.main}>
           <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
           Full User Name : {userNameFortmat}
           <div className="wrap">
@@ -191,7 +191,7 @@ const Home = ({ isMobile }: HomeProps) => {
               {listStyle ? (
                 <>
                   {data.map((data) => (
-                    <div className="d-flex border p-3 mb-3 contents" key={data.id}>
+                    <div className={`${style.contents} d-flex border p-3 mb-3`} key={data.id}>
                       <Image src={data.src} alt="img" width="150px" height="150px" />
                       <div className="ms-1">
                         <h2>{data.title}</h2>
@@ -205,7 +205,7 @@ const Home = ({ isMobile }: HomeProps) => {
                   <div className="wrap">
                     {data.map((data) => (
                       <div className="col-33 mb-3" key={data.id}>
-                        <div className="p-3 text-center border contents">
+                        <div className={`${style.contents} p-3 text-center border`}>
                           <Image src={data.src} alt="img" width="150px" height="150px" />
                           <div>
                             <h2>{data.title}</h2>
@@ -224,7 +224,7 @@ const Home = ({ isMobile }: HomeProps) => {
           </div>
         </main>
       </div>
-      <footer className="border-top">footer </footer>{' '}
+      <footer className={`${style.footer} border-top`}>footer </footer>{' '}
     </>
   );
 };
