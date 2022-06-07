@@ -1,0 +1,152 @@
+@import 'color.scss';
+
+// input[type='text'] {
+//   border: none;
+//   outline: none;
+//   border-radius: 5px;
+//   margin: 0 10px;
+//   padding: 3px 10px;
+//   font-size: 13px;
+// }
+
+.inputtext {
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  margin: 0 10px;
+  padding: 3px 10px;
+  font-size: 13px;
+}
+
+@mixin headerStyle {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  background: $maincolor;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+}
+
+.header_PC {
+  // @include headerStyle;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  background: $maincolor;
+  width: 100%;
+  color: white;
+  padding: 15px 0px;
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & .search_bar {
+    position: relative;
+
+    & input[type='text'] {
+      width: 85%;
+      height: 35px;
+      background-color: $maincolor;
+      border: 1px solid #57606a;
+      padding: 0 15px;
+      padding-right: 35px;
+      width: 250px;
+      transition: 0.3s;
+    }
+    & .search_icon {
+      position: absolute;
+      right: 20px;
+      top: 5px;
+    }
+    & input[type='text']:focus {
+      background-color: white;
+    }
+    & input[type='text']:focus + .search_icon {
+      color: black;
+    }
+  }
+
+  & .header_PC_right {
+    display: flex;
+    align-items: center;
+    position: relative;
+    & .header_PC_right_menu {
+      position: absolute;
+      right: 0;
+      top: 40px;
+      color: white;
+      padding: 5px 20px;
+      background-color: $maincolor;
+      & > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        padding: 10px 0;
+        & a {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  & a {
+    margin: 0 10px 0 20px;
+    color: white;
+  }
+}
+
+.header_M {
+  @include headerStyle;
+  padding: 0px 20px;
+  height: 50px;
+}
+
+.header_M_menu {
+  position: fixed;
+  left: 0;
+  top: 50px;
+  z-index: 9999;
+  background-color: $maincolor;
+  width: 100%;
+  color: white;
+
+  & li {
+    text-align: center;
+    padding: 10px 0;
+
+    & .search_bar {
+      width: 100%;
+
+      & input[type='text'] {
+        width: 85%;
+      }
+    }
+
+    & a {
+      color: white;
+    }
+  }
+}
+
+.main {
+  margin: 100px 0;
+
+  & .contents {
+    border-radius: 8px;
+  }
+}
+
+.footer {
+  text-align: center;
+  padding: 70px 0;
+}

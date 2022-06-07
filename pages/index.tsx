@@ -3,6 +3,11 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { userNameFormatSelector } from 'atoms/user/selector';
+import { themeState } from 'atoms/common/atom';
+
+import Switch from 'react-switch';
+
+import style from '../styles/main/main.module.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -12,6 +17,8 @@ import {
   faTablet,
   faMagnifyingGlass,
   faXmark,
+  faGear,
+  faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
 
 import defalutimg from './img/default_image.png';
@@ -55,8 +62,12 @@ const Home = ({ isMobile }: HomeProps) => {
   ];
   const [listStyle, SetListStyle] = useState(true);
   const [mobilemenu, SetMobilemenu] = useState(false);
+  const [setting, SetSetting] = useState(false);
   const [userName, setUserName] = useState('Kim Younghoon');
   const [userNameFortmat, setUserNameFormat] = useRecoilState(userNameFormatSelector);
+
+  const [darkmodeatom, Setdarkmodeatom] = useRecoilState(themeState);
+  const [darkmodebool, Setdarkmodebool] = useState(false);
 
   useEffect(() => {
     setUserNameFormat(userName);
@@ -64,6 +75,18 @@ const Home = ({ isMobile }: HomeProps) => {
 
   function onToggleMenu() {
     SetMobilemenu((prev) => !prev);
+  }
+
+  function darkModeChange() {
+    if (darkmodeatom == 'light') {
+      document.getElementsByTagName('html')[0].classList.add('darkmode');
+      Setdarkmodeatom('dark');
+      Setdarkmodebool(true);
+    } else {
+      document.getElementsByTagName('html')[0].classList.remove('darkmode');
+      Setdarkmodeatom('light');
+      Setdarkmodebool(false);
+    }
   }
 
   return (
@@ -74,7 +97,7 @@ const Home = ({ isMobile }: HomeProps) => {
       <div className="container">
         {isMobile ? (
           <>
-            <header id="header_M">
+            <header id="header_M" className={style.header_M}>
               <div onClick={onToggleMenu} style={{ width: '15px;' }}>
                 <FontAwesomeIcon icon={mobilemenu ? faXmark : faBars}></FontAwesomeIcon>
               </div>
@@ -85,10 +108,10 @@ const Home = ({ isMobile }: HomeProps) => {
             </header>
 
             {mobilemenu ? (
-              <ul id="header_M_menu" className="p-3">
+              <ul id="header_M_menu" className={`${style.header_M_menu} p-3`}>
                 <li>
-                  <div className="search-bar">
-                    <input type="text" />
+                  <div className={style.search_bar}>
+                    <input type="text" className={style.inputtext} />
                     <span className="pointer">
                       <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </span>
@@ -110,24 +133,51 @@ const Home = ({ isMobile }: HomeProps) => {
             ) : null}
           </>
         ) : (
-          <header id="header_PC">
-            <div>
-              <span className="me-4">Logo</span>
-              <div className="d-inline-block search-bar me-3">
-                <input type="text" />
-                <span className="pointer">
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </span>
+          <header id="header_PC" className={`${style.header_PC}`}>
+            <div className="container">
+              <div>
+                <span className="me-4">Logo</span>
+                <div className={`${style.search_bar} d-inline-block me-3"`}>
+                  <input type="text" className={style.inputtext} placeholder="Search" />
+                  <span className={`${style.search_icon} pointer`}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                  </span>
+                </div>
+                <a href="">menu1</a>
+                <a href="">menu2</a>
+                <a href="">menu3</a>
+                <a href="">menu4</a>
               </div>
-              <a href="">menu1</a>
-              <a href="">menu2</a>
-              <a href="">menu3</a>
-              <a href="">menu4</a>
+              <div className={style.header_PC_right}>
+                <FontAwesomeIcon
+                  icon={faGear}
+                  className="pointer"
+                  onClick={() => SetSetting((prev) => !prev)}
+                />
+                {setting && (
+                  <div className={style.header_PC_right_menu}>
+                    <div>
+                      <div style={{ marginRight: '10px' }}>DARKMODE</div>
+                      <Switch
+                        onChange={darkModeChange}
+                        checked={darkmodebool}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        width={30}
+                        height={15}
+                      />
+                    </div>
+                    <div className="pointer">
+                      <a href="">LOGOUT</a>{' '}
+                      <FontAwesomeIcon icon={faRightFromBracket} style={{ marginLeft: '5px' }} />
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-            <a href="">LOGOUT</a>
           </header>
         )}{' '}
-        <main>
+        <main className={style.main}>
           <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
           Full User Name : {userNameFortmat}
           <div className="wrap">
@@ -137,28 +187,22 @@ const Home = ({ isMobile }: HomeProps) => {
             <section className="col-60">
               <div className="d-flex border-bottom pb-1 mb-3">
                 <div className="ms-auto d-flex align-items-center">
-                  {isMobile ? null : (
-                    <>
-                      {' '}
-                      <span
-                        className="pointer"
-                        onClick={() => {
-                          SetListStyle(true);
-                        }}
-                      >
-                        {' '}
-                        <FontAwesomeIcon icon={faList}></FontAwesomeIcon>
-                      </span>
-                      <span
-                        className="mx-5 pointer"
-                        onClick={() => {
-                          SetListStyle(false);
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faTablet}></FontAwesomeIcon>
-                      </span>
-                    </>
-                  )}
+                  <span
+                    className="pointer"
+                    onClick={() => {
+                      SetListStyle(true);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faList}></FontAwesomeIcon>
+                  </span>
+                  <span
+                    className="mx-5 pointer"
+                    onClick={() => {
+                      SetListStyle(false);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faTablet}></FontAwesomeIcon>
+                  </span>
                   <a href="" style={{ fontWeight: 'bold' }}>
                     글쓰기
                   </a>
@@ -167,7 +211,7 @@ const Home = ({ isMobile }: HomeProps) => {
               {listStyle ? (
                 <>
                   {data.map((data) => (
-                    <div className="d-flex border p-3 mb-3 contents" key={data.id}>
+                    <div className={`${style.contents} d-flex border p-3 mb-3`} key={data.id}>
                       <Image src={data.src} alt="img" width="150px" height="150px" />
                       <div className="ms-1">
                         <h2>{data.title}</h2>
@@ -181,7 +225,7 @@ const Home = ({ isMobile }: HomeProps) => {
                   <div className="wrap">
                     {data.map((data) => (
                       <div className="col-33 mb-3" key={data.id}>
-                        <div className="p-3 text-center border contents">
+                        <div className={`${style.contents} p-3 text-center border`}>
                           <Image src={data.src} alt="img" width="150px" height="150px" />
                           <div>
                             <h2>{data.title}</h2>
@@ -200,7 +244,7 @@ const Home = ({ isMobile }: HomeProps) => {
           </div>
         </main>
       </div>
-      <footer className="border-top">footer </footer>{' '}
+      <footer className={`${style.footer} border-top`}>footer </footer>{' '}
     </>
   );
 };
