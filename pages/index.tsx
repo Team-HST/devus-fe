@@ -17,6 +17,8 @@ import {
   faTablet,
   faMagnifyingGlass,
   faXmark,
+  faGear,
+  faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
 
 import defalutimg from './img/default_image.png';
@@ -60,6 +62,7 @@ const Home = ({ isMobile }: HomeProps) => {
   ];
   const [listStyle, SetListStyle] = useState(true);
   const [mobilemenu, SetMobilemenu] = useState(false);
+  const [setting, SetSetting] = useState(false);
   const [userName, setUserName] = useState('Kim Younghoon');
   const [userNameFortmat, setUserNameFormat] = useRecoilState(userNameFormatSelector);
 
@@ -130,30 +133,47 @@ const Home = ({ isMobile }: HomeProps) => {
             ) : null}
           </>
         ) : (
-          <header id="header_PC" className={`${style.header_PC} p-3`}>
-            <div>
-              <span className="me-4">Logo</span>
-              <div className={`${style.search_bar} d-inline-block me-3"`}>
-                <input type="text" className={style.inputtext} />
-                <span className="pointer">
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </span>
+          <header id="header_PC" className={`${style.header_PC}`}>
+            <div className="container">
+              <div>
+                <span className="me-4">Logo</span>
+                <div className={`${style.search_bar} d-inline-block me-3"`}>
+                  <input type="text" className={style.inputtext} placeholder="Search" />
+                  <span className={`${style.search_icon} pointer`}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                  </span>
+                </div>
+                <a href="">menu1</a>
+                <a href="">menu2</a>
+                <a href="">menu3</a>
+                <a href="">menu4</a>
               </div>
-              <a href="">menu1</a>
-              <a href="">menu2</a>
-              <a href="">menu3</a>
-              <a href="">menu4</a>
-            </div>
-            <div className={style.header_PC_right}>
-              <Switch
-                onChange={darkModeChange}
-                checked={darkmodebool}
-                uncheckedIcon={false}
-                checkedIcon={false}
-                width={50}
-                height={20}
-              />
-              <a href="">LOGOUT</a>
+              <div className={style.header_PC_right}>
+                <FontAwesomeIcon
+                  icon={faGear}
+                  className="pointer"
+                  onClick={() => SetSetting((prev) => !prev)}
+                />
+                {setting && (
+                  <div className={style.header_PC_right_menu}>
+                    <div>
+                      <div style={{ marginRight: '10px' }}>DARKMODE</div>
+                      <Switch
+                        onChange={darkModeChange}
+                        checked={darkmodebool}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        width={30}
+                        height={15}
+                      />
+                    </div>
+                    <div className="pointer">
+                      <a href="">LOGOUT</a>{' '}
+                      <FontAwesomeIcon icon={faRightFromBracket} style={{ marginLeft: '5px' }} />
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </header>
         )}{' '}
